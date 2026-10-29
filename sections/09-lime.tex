@@ -1,0 +1,20 @@
+% ---------- LIME (Krempl part 4) ----------
+\begin{topic}{9 \; Explainability: LIME}{cLime}
+\insight{\term{L}ocal (explains one prediction, in its neighbourhood) \term{I}nterpretable \term{M}odel-agnostic (any black box) \term{E}xplanations; post-hoc.}
+\insight{Why: low error $\ne$ trustworthy (husky called wolf because of \term{snow} in background); softmax ``confidence'' does not flag misclassifications (fooling images $\ge$99.6\%).}
+\sub{Algorithm}
+\insight{1 \term{Interpretable components} $x'$: tabular $\to$ features (columns); image $\to$ superpixels (segments); text $\to$ single words (bag-of-words; not embeddings: hard to explain).}
+\insight{2 \term{Perturb} around $x'$: switch components on/off $\to$ samples $z'$ (tabular: missing values; image: grey out superpixels; text: remove words); score each with black box $f(z)$.}
+\insight{3 Weight samples by proximity $\pi_x$, fit simple weighted \term{linear regression} $g$ (K-Lasso, max $K$ features).}
+\insight{4 Show components with highest (positive) weights (image: grey out the rest; text: show weights).}
+\formula{Objective}{\xi(x)=\arg\min_{g\in G}\ \underbrace{L(f,g,\pi_x)}_{\text{approx.\ quality}}+\underbrace{\Omega(g)}_{\text{complexity}}}{}
+\formula{Loss}{L(f,g,\pi_x)=\sum_{z,z'\in Z}\pi_x(z)\big(f(z)-g(z')\big)^2}{weighted squared error between black box and local approximation.}
+\formula{Proximity}{\pi_x(z)=\exp\big(-D(x,z)^2/\sigma^2\big)}{Gaussian kernel, $D$ cosine (text) or L2 (images), $\sigma^2$ bandwidth = size of neighbourhood.}
+\formula{Complexity}{\Omega(g)=\infty\cdot\mathbb{1}[\|w_g\|_0>K]}{at most $K$ non-zero weights (features, words, superpixels).}
+\sub{Use, limits, risks}
+\insight{Uses: explain a prediction or model, choose between two black boxes, detect \& improve untrustworthy models.}
+\insight{Limits: chosen interpretable representation limits what can be explained (sepia filter not a superpixel; greying out a castle on a hill?); trade-off simplicity vs faithfulness (locally non-linear models), but faithfulness can be measured; only \term{local}, not global (SP-LIME picks a covering set of instances for a model view; optional, not exam material); can give different top features on different runs.}
+\insight{\term{Global} feature importance (model average over all cases) $\ne$ \term{local} reason for one case (``debt history most important overall'' doesn't explain household \#4471).}
+\insight{Explains model behaviour near the case, \emph{not} what caused the person's situation. Risks: users read approximation as cause; instability across runs (measure: rerun on same cases, how often top-3 changes); proxies for protected traits (postcode $\approx$ migration background/income: leave out, not actionable); gaming; leaking training data.}
+\insight{When decisions affect people (grant, appeal) explanations must be: stable, recorded at decision time, contestable (checkable facts), based on features the person can influence.}
+\end{topic}

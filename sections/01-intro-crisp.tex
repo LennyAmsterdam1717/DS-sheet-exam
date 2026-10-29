@@ -1,0 +1,25 @@
+% ---------- Lecture 1: data science, analytics types, CRISP-DM, cases, containers ----------
+\begin{topic}{1 \; Data science, analytics \& CRISP-DM}{cIntro}
+\sub{Analytics Ascendancy Model (value \& difficulty $\uparrow$)}
+\insight{\term{Descriptive}: what happened? (reporting, retrospective; enablers: visualisation, dashboards, descriptive stats)}
+\insight{\term{Diagnostic}: why did it happen?}
+\insight{\term{Predictive}: what (and why) will happen? (data mining, ML, forecasting)}
+\insight{\term{Prescriptive}: how \& why make it happen? best decision; uses descriptive + predictive (optimisation, simulation)}
+\insight{Mapping: optimisation $\to$ prescr.; simulation $\to$ prescr.; data mining $\to$ pred.; forecasting $\to$ pred.; data warehousing $\to$ descr.; OLAP $\to$ descr.}
+\insight{Data science = \term{domain expertise} $\cap$ \term{statistics \& maths} $\cap$ \term{computer science / hacking}.}
+\sub{CRISP-DM (6 phases, iterative, de-facto standard but dated)}
+\insight{\term{Business underst.} aims \& requirements $\to$ \term{Data underst.} collect \& explore raw data, quality issues $\to$ \term{Data preparation} select \& transform into final data $\to$ \term{Modelling} $\to$ \term{Evaluation} reliability \& usefulness $\to$ \term{Deployment} put model to use (e.g.\ report).}
+\insight{Arrows back = iterate. \term{Evaluation $\to$ Data underst.}: evaluation reveals model misses a relevant aspect (variable) or used a biased sample $\Rightarrow$ check data for missing variables \& representativeness, add variables / acquire more balanced data. (Ex: insurance ad in Men's Health $\Rightarrow$ sample biased to men.)}
+\insight{Most time goes to data understanding/preparation; most projects never reach deployment.}
+\sub{Lessons from the intro cases}
+\insight{A Twitter/Sandy: worst-hit areas may lack power $\Rightarrow$ \term{biased, non-representative} data.}
+\insight{B Sally Clark: $1/8543^2$ assumes \term{independence} (wrong) + \term{prosecutor's fallacy} (ignores base rate).}
+\insight{C COMPAS: arrests $\ne$ crimes; biased labels $\Rightarrow$ unfair model; \term{fairness vs accuracy} trade-off.}
+\insight{D Salary survey: different populations; low earners don't report (data \term{missing not at random}).}
+\insight{E Earlier diagnosis $\Rightarrow$ longer survival even without treatment effect (must correct).}
+\insight{F Sharing contacts: \term{shadow profiles} of people who never consented (privacy).}
+\sub{ML(Dev)Ops \& containers}
+\insight{MLOps motivation: consistency \& reusability, traceability \& governance, reliability, monitoring.}
+\insight{\term{Container vs VM}: container has no own OS, shares host kernel/resources; VM partitions hardware via hypervisor + guest OS. Both: package app + dependencies, isolate apps, add a layer to host OS, run several apps in parallel (VM fewer).}
+\insight{Docker not Linux-only (e.g.\ Windows Server Core images) but engine uses a Linux kernel (native or via VM). \term{Orchestration} = configure, coordinate, scale, maintain containers (e.g.\ Kubernetes).}
+\end{topic}

@@ -1,0 +1,15 @@
+% ---------- Recurring question types in the exercises + how to answer them ----------
+\begin{topic}{12 \; Typical questions \& approach}{cExam}
+\insight{Exam: digital (Remindo) with guessing-negation; covers all lectures, tutorials \& exercises.}
+\insight{\term{``Which statements are correct?''} Check the trap word: direction (FP vs FN; Martini glass narrow$\to$wide; marginalise over $y$), scope (internal vs external; local vs global), absolutes (``always'', purity vs \#clusters), lagging vs leading.}
+\insight{\term{Analytics type / CRISP-DM}: map task $\to$ descriptive/predictive/prescriptive; explain a back-arrow with a concrete data problem + what to do in that phase.}
+\insight{\term{Clustering by hand}: distance matrix (L1/L2, scale first?) $\to$ merges (single = min, complete = max) with merge heights $\to$ dendrogram $\to$ cut at $k$. k-means: assign (sq.\ Eucl.) $\to$ centres = means $\to$ repeat until stable. Silhouette $a,b,s$ for one point. Purity/RI via pair counts.}
+\insight{\term{Bayes}: from table/plot get prior, joint, marginal ($\sum_y$), conditional; posterior $=$ joint / marginal; classify by larger posterior; naive = product of per-feature conditionals vs multivariate = joint count; Bayes error = area under lower curve.}
+\insight{\term{Evaluation}: confusion matrix (columns actual) $\to$ Acc, Err, TPR, FPR, Spec, cost; ROC: who dominates, which is random (diagonal), crossing curves.}
+\insight{\term{Statistics}: compute mean/median/IQR/$s$; skew sign from tail (mean vs median); $z$-score outlier test (note inflation by the outlier); normal probabilities via $F(b)-F(a)$; KL; Pearson vs Spearman; independence check $P(A,B)=P(A)P(B)$.}
+\insight{\term{Preparation}: min-max / z-score / decimal scaling; binning smoothing; missing-value strategy; fix vs report; quality dimension of a given glitch; join type \& row count.}
+\insight{\term{LP}: name variables (units), objective, all constraints (incl.\ non-negativity, ratios as $\le0$), convert to standard form ($\times-1$), linear or not, binding constraints, effect of changing a RHS.}
+\insight{\term{Visualisation}: question $\to$ chart $\to$ visual task; colour scheme (categorical/sequential/diverging); which Gestalt principle is violated + fix; storytelling schema; is axis truncation honest?}
+\insight{\term{KPI}: CSF $\to$ KPI with formula (denominator!), unit, source, frequency, target + deadline; lagging vs leading; chart per KPI; how a headline count misleads.}
+\insight{\term{LIME}: global vs local; explain the 4 steps in plain words; what not to show (proxies) and why; requirements when decisions are contestable.}
+\end{topic}

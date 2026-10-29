@@ -1,0 +1,9 @@
+# LaTeX build output
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.out
+*.synctex.gz
+*.toc
+main.pdf

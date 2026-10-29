@@ -1,0 +1,14 @@
+% ---------- Symbol legend: every symbol on the sheet is defined once here ----------
+\begin{topic}{Symbols \& conventions (used on the whole sheet)}{cLegend}
+\textbf{General:} $n$ \#instances (observations); $x_i$ value of instance $i$; capital $X,Y$ = variable, lowercase $x,y$ = value; $X$ feature / explanatory var.; $Y$ class label / dependent var.; $P(\cdot)$ probability (slides also write Pr); $P(A,B)$ joint; $P(A|B)$ conditional; $\sum$ sum; $\prod$ product; $|S|$ size of set $S$; $\binom{m}{2}=\frac{m(m-1)}{2}$ \#pairs.
+
+\textbf{Statistics:} $\xbar=\frac1n\sum x_i$ sample mean; $\mu$ true (population) mean, $\hat\mu$ its estimate; $s$ sample std.\ deviation, $s^2$ sample variance; $\sigma$ std.\ dev.\ of a distribution; $Q_1,Q_3$ 1st/3rd quartile; $f(x)$ PDF (density); $F(x)=P(X\le x)$ CDF; $\Phi$ CDF of standard normal; $z$ z-score; $H$ entropy; $D(p\|q)$ KL divergence ($p$ true, $q$ approximation); $r$ Pearson corr.\ (in distances: Minkowski exponent); $\beta_0$ intercept, $\beta_1..\beta_p$ slopes, $\epsilon$ error term; $\hat y$ prediction.
+
+\textbf{Distances / clustering:} $M$ \#attributes; $x_{im}$ value of attribute $m$ of instance $i$; $\vec x_i$ feature vector; $d_{ij}$ distance, $a_{ij}$ similarity between $i,j$; $s_m$ std.\ of attribute $m$; $\Sigma$ covariance matrix; $k$ \#clusters; $Z=\{z_1..\}$ clusters, $Y=\{y_1..\}$ classes; $n_k$ size of cluster $k$; $\bar z_i$ centre of cluster $i$; $a(x),b(x),s(x)$ silhouette parts; RSS residual sum of squares.
+
+\textbf{Classification:} $+/-$ positive/negative class; $L_+,L_-$ labelled training instances per class; $P(Y)$ prior, $P(X|Y)$ class-conditional (likelihood), $P(Y|X)$ posterior; $K(x,x_i)$ kernel, $\sigma$ its bandwidth; TP/FP/FN/TN true pos./false pos./false neg./true neg.; TPR, FPR true/false positive rate; Cost$_{FP}$, Cost$_{FN}$ error costs.
+
+\textbf{LIME:} $f$ black-box model; $x'$ interpretable version of $x$; $z'$ perturbed sample; $g\in G$ simple (linear) explanation model; $\pi_x$ proximity weight; $\Omega(g)$ complexity penalty; $K$ max \#features in explanation; $D$ distance.
+
+\textbf{Optimisation:} $x_1..x_n$ decision variables; $f(\vec x)$ objective function; $\vec c$ objective coefficients; $A$ constraint coefficient matrix; $\vec b$ right-hand sides.
+\end{topic}

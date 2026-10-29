@@ -1,0 +1,33 @@
+% ---------- Clustering (Krempl part 4) ----------
+\begin{topic}{7 \; Segmentation: clustering}{cClust}
+\insight{Data mining tasks: \term{segmentation} (unsupervised: clustering, outlier analysis), \term{prediction} (supervised: classification, regression, time series), \term{association} (unsupervised: frequent itemsets, association rules, link \& sequence analysis).}
+\insight{Goal: maximise \term{intra-cluster homogeneity} and \term{inter-cluster heterogeneity}.}
+\sub{Types}
+\insight{\term{Flat} (partitions) vs \term{hierarchical} (hierarchy of instances by proximity, dendrogram; cutting at $k$ gives hard partition). \term{Hard} (one cluster per instance) vs \term{soft/probabilistic} (membership probability for every cluster).}
+\insight{Flat: \term{shape-based} (assumes cluster shape: k-means spheres, EM Gaussian mixture; params: shape, \#components) vs \term{density-based} (clusters separated by low-density regions, e.g.\ DBSCAN with noise label; params: density estimator, threshold).}
+\insight{k-means: flat, hard \,|\, EM-GMM: flat, soft \,|\, agglomerative: hierarchical \,|\, DBSCAN: flat, hard, density-based.}
+\insight{Hierarchical: \term{agglomerative} (start: every instance own cluster, merge closest) vs \term{divisive} (start: one cluster, split).}
+\insight{Linkage = cluster distance: \term{single} closest pair (nearest neighbour; \term{chains}), \term{complete} most distant pair (compact), \term{average} mean over all pairs, \term{Ward} variance-minimising.}
+\insight{Which data? Spherical/well separated $\to$ k-means/EM (or density); overlapping $\to$ k-means/EM (not single-link/density); elongated, chains, arbitrary shapes $\to$ single-link or density-based; Gaussians + uniform noise $\to$ EM.}
+\sub{Distance \& similarity}
+\formula{Minkowski}{d_{ij}=\Big(\sum_{m=1}^M|x_{im}-x_{jm}|^r\Big)^{1/r}}{$r=1$: \term{L1, city-block, Manhattan} (sum of abs.\ differences); $r=2$: \term{L2, Euclidean} (weights large differences over-proportionally).}
+\ex{(0,0)--(3,4): L1 = 7, L2 = 5. Unit of 2nd attribute 10$\times$ smaller $\to$ (3,40): L1 = 43, L2 = 40.1 $\Rightarrow$ Minkowski distances are \term{scale-dependent}: standardise first or use a scale-invariant measure. Income vs hours: $d(P,Q)=1000$ (EUR 1000) vs $d(P,R)=10$ (10 h) is an artefact of units.}
+\formula{Standardised Eucl.}{d_{ij}=\Big(\sum_{m=1}^M\frac{(x_{im}-x_{jm})^2}{s_m^2}\Big)^{1/2}}{}
+\formula{Mahalanobis}{d_{ij}=\big((\vec x_i-\vec x_j)^T\Sigma^{-1}(\vec x_i-\vec x_j)\big)^{1/2}}{scale-invariant; equals standardised Euclidean when attributes have zero covariance.}
+\formulaD{Q-correlation (similarity)}{a_{ij}=\frac{\sum_m(x_{im}-\xbar_i)(x_{jm}-\xbar_j)}{\big[\sum_m(x_{im}-\xbar_i)^2\cdot\sum_m(x_{jm}-\xbar_j)^2\big]^{1/2}}}{$\xbar_i$ = mean over instance $i$'s \emph{attributes}. Compares \term{profiles (shape), not location}: (1,2,3) vs (5,6,7) $\to$ 1; inverted profile $\to -1$. Use for relative attribute values; Euclidean/L1/Mahalanobis for absolute ones. Correlation distance $=1-|r|$.}
+\formula{Jaccard}{J(A,B)=\frac{|A\cap B|}{|A\cup B|}}{bag-of-words sets: ``this is not bad'' vs ``this is really bad'' $\to 3/5$.}
+\sub{Algorithms}
+\insight{\term{k-means}: choose $k$, distance, stopping rule $\to$ random initial centres $\to$ assign each instance to nearest centre $\to$ centre = mean (or median) of its instances $\to$ repeat until no change. Finds a \term{local} optimum depending on initialisation $\Rightarrow$ several random restarts, keep best. Spherical clusters.}
+\insight{\term{EM} (Gaussian mixture): soft clustering; cluster assignment = hidden variable $Z$; maximise likelihood $l(\theta)=\log\sum_H p(D,H|\theta)$ by alternating \term{E-step} (membership probabilities $Q$) and \term{M-step} (parameters $\theta$). Gives uncertainty of assignment (k-means can't); also usable for missing-value imputation.}
+\ex{k-means by hand ($k=2$, init A,B, squared Eucl.): assign C,D,E to nearer centre $\to$ \{A,C\},\{B,D,E\}; centres (5,5),(2,5); re-assign: same $\Rightarrow$ converged. Single link L1: merge at min distance (C,D at 2; +E at 3; +B at 4; +A at 5); complete: max distance (C,D 2; +E 3; \{A,B\} 5; all 8).}
+\sub{Evaluation}
+\insight{\term{Internal} (no labels: RSS, silhouette) vs \term{external} (vs ground-truth classes: purity, NMI, Rand). A clustering can look good internally and still not match the classes; higher silhouette $\ne$ better match with labels.}
+\formula{Avg.\ distance}{d(x_i,k)=\frac{1}{|z_k|-1}\sum_{x\in z_k,x\ne x_i}\text{dist}(x_i,x)}{own cluster: divide by $n_k-1$ (exclude $x_i$); other clusters: average over all their $n_k$ members (as in exercise answers).}
+\formula{Silhouette}{a(x_i)=d(x_i,l),\ b(x_i)=\min_{k\ne l}d(x_i,k),\ s(x_i)=\frac{b-a}{\max(a,b)}}{$l$ = own cluster. $s\approx1$ well clustered, $\approx0$ on border, $<0$ closer to another cluster (likely wrong). Index $SI$ = mean over clusters of mean $s$. Ex: $a(C)=6$, $b(C)=4$ $\to s=-0.33$.}
+\formula{Purity}{\frac1n\sum_{i=1}^{|Z|}\max_j|z_i\cap y_j|\in[0,1]}{each cluster gets its majority class; \term{grows with \#clusters} (1 if one instance per cluster) $\Rightarrow$ can't compare different $k$.}
+\formulaD{NMI}{\begin{gathered}NMI=\frac{I(Y,Z)}{(H(Z)+H(Y))/2},\quad H(Z)=-\sum_i\frac{|z_i|}{n}\log\frac{|z_i|}{n}\\ I(Y,Z)=\sum_i\sum_j\frac{|z_i\cap y_j|}{n}\log\frac{n\,|z_i\cap y_j|}{|z_i|\,|y_j|}\end{gathered}}{in [0,1], 1 perfect; normalised for \#clusters $\Rightarrow$ use to compare clusterings with different $k$.}
+\formula{Rand Index}{RI=\frac{TP+TN}{TP+FP+FN+TN}\ \text{(over all }\tbinom n2\text{ pairs)}}{TP same cluster \& same class; FP same cluster, diff.\ class; FN diff.\ cluster, same class; TN diff.\ both. Share of correct pair decisions. Adjusted RI corrects for chance ($\approx0$ = random agreement).}
+\insight{Pair counting from contingency table ($n_{ij}=|z_i\cap y_j|$): $TP=\sum_{ij}\binom{n_{ij}}2$; $TP+FP=\sum_i\binom{|z_i|}2$ (cluster sizes); $TP+FN=\sum_j\binom{|y_j|}2$ (class sizes); $TN=\binom n2-TP-FP-FN$.}
+\ex{rows 5,1,0 | 1,4,1 | 2,0,3 ($n=17$): TP 20, FP 20, FN 24, TN 72; RI $=92/136=0.68$; purity 0.71; NMI 0.36.}
+\formula{RSS}{RSS_k=\sum_{z_i\in Z}\sum_{x\in z_i}(x-\bar z_i)^2}{always decreases with $k$ (0 when $k=n$) $\Rightarrow$ \term{elbow method}: average RSS over random inits per $k$, plot vs $k$, pick the knee where curve flattens (e.g.\ 240,150,62,50,44,40 $\to k=3$); like choosing \#components in PCA.}
+\end{topic}

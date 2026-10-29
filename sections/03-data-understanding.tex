@@ -1,0 +1,36 @@
+% ---------- Data understanding: warehouse, formats, APIs, SQL, nature of data ----------
+\begin{topic}{3 \; Data understanding: sources, formats, SQL, nature of data}{cData}
+\sub{Data warehouse (DW)}
+\insight{Central physical repository for decision support: enterprise-wide, cleansed, standardised, mostly structured, analytics-ready. Often \emph{not} normalised. Fed by \term{ETL} (extract, transform, load) via staging area; data marts = subsets.}
+\insight{DW properties: \term{subject-oriented} (by subject, decision-relevant, not by product/operation), \term{integrated} (many sources $\to$ consistent format), \term{time-variant} (time-stamped, time = key dimension), \term{nonvolatile} (not updated; obsolete data discarded).}
+\insight{Operational OLTP DBs: designed independently for efficiency \& consistency $\Rightarrow$ integration needed for decision support.}
+\sub{File formats}
+\insight{\term{CSV}: tabular, plain text, lightweight; only for strictly tabular data with same attributes (no nesting / lists of lists).}
+\insight{\term{XML}: markup, self-descriptive, user-defined tags; one root, every tag closed, case-sensitive, properly nested, attribute values quoted, entity refs (\texttt{\&lt; \&gt; \&amp;}); extensible; more overhead, larger \& slower than CSV.}
+\insight{\term{JSON}: name/value pairs, \texttt{\{\}} objects, \texttt{[]} arrays; vs XML: no end tags, shorter, quicker, arrays. Both: human readable, hierarchical, widely parseable.}
+\sub{Accessing remote data (APIs)}
+\insight{\term{ODBC}: standard middleware API to databases, independent of DBMS \& OS; driver translates; SQL query passed to DBMS.}
+\insight{\term{SOAP}: XML-based messaging \emph{protocol} (envelope, header, body, fault); transport-independent, standardised (WS*), built-in error handling, function-driven.}
+\insight{\term{REST}: architectural \emph{style} over HTTP: GET read, POST add, PUT update, DELETE remove; mostly JSON; lightweight, fast, cacheable, data-driven.}
+\sub{SQL}
+\insight{Entity = one object (row/tuple); attribute = column; entity type $\approx$ table; \term{primary key} uniquely identifies an entity; \term{foreign key} refers to another table's key.}
+\insight{\texttt{SELECT [DISTINCT] cols FROM t [JOIN t2 ON cond] WHERE .. GROUP BY .. HAVING .. ORDER BY .. [ASC|DESC] LIMIT n;} \; \texttt{COUNT()} with \texttt{GROUP BY} aggregates per group.}
+\insight{\term{INNER}: only matches. \term{LEFT}: all left rows (+NULL if no match). \term{RIGHT}: all right rows. \term{FULL OUTER}: everything, matched where possible.}
+\ex{customers(4) $\bowtie$ orders(4), Anna 2 orders, Bram \& Daan none, order 104 $\to$ non-existent customer: INNER 3, LEFT 5, RIGHT 4, FULL 6 rows. Anna appears twice (one row per match).}
+\insight{``Customers who never ordered'' = LEFT JOIN + \texttt{WHERE orders.id IS NULL}; ``orders without valid customer'' (quality check) = RIGHT JOIN + customer side NULL.}
+\sub{Nature of data}
+\insight{Data = collection of facts (observations, experiments, transactions); lowest abstraction; \term{garbage in, garbage out} $\Rightarrow$ make data analytics-ready.}
+\insight{\term{Structured} (processable as is: star ratings, word counts, category codes \emph{or} names, transaction value) vs \term{semi-structured} (XML) vs \term{unstructured} (review text, images): need text mining or conversion.}
+\sub{Levels of measurement $\to$ allowed statistics}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+nominal & mode (e.g.\ nationality) \\
+ordinal & + median (order meaningful, grades) \\
+interval & + arithmetic mean, std.\ (fixed unit, \textdegree C) \\
+ratio & + geometric \& harmonic mean, variation coeff.\ (ratio meaningful: length, income) \\
+\end{tabularx}
+\sub{Arrival of data \& drift}
+\insight{\term{Pool/batch}: all at once. \term{Stream}: arrives sequentially (chunks or one-by-one), possibly infinite, few instances at start, non-stationary. \term{Time series}: time-stamped.}
+\insight{Stream challenges: limited computation/storage (online processing), adaptation to change. Fixes: incremental computation (store partial sums; overflow risk), \term{forgetting} old instances, \term{windowing} (only most recent).}
+\insight{Non-stationary $\Rightarrow$ ``the'' distribution varies over time; e.g.\ average monthly sales over 5 years mixes seasons/trends $\Rightarrow$ use recent window, compare with last month \& same month last year.}
+\insight{\term{Concept drift} (population drift, dataset shift) by: affected distribution $P(X,Y),P(X),P(Y),P(Y|X),P(X|Y)$; smoothness: sudden/abrupt, incremental, gradual; recurring concepts (old models relevant again); systematic vs unsystematic; \term{real} (changes decision boundary) vs virtual. A single outlier is \emph{not} drift.}
+\end{topic}

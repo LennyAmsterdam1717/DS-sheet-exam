@@ -1,0 +1,18 @@
+% ---------- Prescriptive analytics: optimisation (Krempl part 5) ----------
+\begin{topic}{10 \; Prescriptive analytics: optimisation}{cOpt}
+\insight{Find the best (optimal) solution: not only describe/predict but suggest (re)actions $\to$ how \& why make it happen. Predictive models can supply coefficients (expected returns, delivery costs). Easy what-if scenarios.}
+\sub{Formulation}
+\insight{\term{Decision variables} $\vec x$: inputs we control. \term{Objective function} $f(\vec x)$: output to minimise/maximise. \term{Constraints}: equality ($=$) or inequality ($\le,\ge$), from business rules (budget, diversity) or physical laws (non-negativity, task order). \term{Feasible area}: all $\vec x$ satisfying \emph{all} constraints.}
+\formula{Standard form}{\min_{\vec x}\ \vec c^{\,T}\vec x\ \ \text{s.t.}\ A\vec x\le\vec b\ (\text{and equalities})}{$\max f$ $\to$ $\min -f$ (multiply by $-1$); $\ge$ constraint $\to$ $\le$ (multiply by $-1$): $x_1+x_2\ge b \Leftrightarrow -x_1-x_2\le -b$.}
+\insight{\term{Linear program (LP)}: objective \emph{and all} constraints linear in $\vec x$. Linear: $3x_1+2x_2-x_3=9$, $\alpha x_1-\beta x_2\le\gamma$, $x_2\ge\alpha$. Non-linear: $\alpha/x_1$, $x_1x_2$, $\max(2x_1,3x_2)$.}
+\insight{\term{Global} vs \term{local} optimum. \term{Binding (active)} constraint: holds with equality at the optimum, restricts it (relaxing it changes the optimum). \term{Non-binding}: slack; omitting it does not change the optimum.}
+\sub{Categories}
+\insight{unlimited (no constraints) vs limited; one vs many decision variables; single- vs multi-criteria; continuous vs discrete (integer) vs mixed; linear vs non-linear; deterministic (same cause $\to$ same effect) vs stochastic; static vs dynamic (relations change over time).}
+\insight{Problem types: LP \& quadratic (mostly convex, ``easy'', e.g.\ simplex); quadratic constraints/conic; integer \& constraint programming (non-convex); smooth non-linear; non-smooth.}
+\sub{Examples (slides)}
+\ex{Portfolio: $\max 0.11x_1+0.17x_2$ s.t.\ $x_1+x_2\le12$, $x_1\le10$, $x_2\le7$, $x_1\ge0.5x_2\Rightarrow -x_1+0.5x_2\le0$, $x_2\ge0.5x_1\Rightarrow 0.5x_1-x_2\le0$, $x_1,x_2\ge0$ (in k EUR). Optimum $x_1=5$, $x_2=7$, return 1.74k; binding: budget $x_1+x_2\le12$ and $x_2\le7$.}
+\ex{Logistics: $\min 3x_A+5x_B$ s.t.\ $x_A+x_B\ge50$, $x_A\le40$, $x_B\le30$, $x_A,x_B\ge0$. Optimum $x_A=40$, $x_B=10$, cost 170; binding: $x_A\le40$ and $x_A+x_B\ge50$ (cheap centre used to capacity).}
+\sub{Recipe \& PuLP}
+\insight{1 variables + units $\to$ 2 objective (max/min) $\to$ 3 constraints: capacity/budget, requirements, ratios (rewrite to $\le0$), bounds, non-negativity $\to$ 4 standard form ($\vec c$, $A$, $\vec b$) $\to$ 5 solve, check status = Optimal $\to$ 6 read values \& binding constraints $\to$ 7 sensitivity: change RHS of a binding constraint $\Rightarrow$ optimum moves.}
+\insight{PuLP: {\small\texttt{prob = LpProblem("Portfolio", LpMaximize)}\\ \texttt{x1 = LpVariable("x1", upBound=10)}\\ \texttt{prob += 0.11*x1 + 0.17*x2} \textrm{(objective)}\\ \texttt{prob += x1 + x2 <= 12} \textrm{(constraint)}\\ \texttt{prob.solve(); LpStatus[prob.status]; v.varValue}}\\ R \texttt{lpSolve} assumes $\vec x\ge0$.}
+\end{topic}

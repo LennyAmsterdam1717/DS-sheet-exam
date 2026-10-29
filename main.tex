@@ -1,0 +1,35 @@
+% ============================================================
+%  INFOMDSS (Data Science and Society) -- exam sheet
+%  main.tex holds only the page layout and the order of the topics.
+%  Content: sections/*.tex   Look & macros: style.tex
+% ============================================================
+\documentclass{article}
+
+% ---- page: switch the next line to "portrait" (and \COLS to 3) for a portrait sheet ----
+\usepackage[a4paper,landscape,margin=5mm]{geometry}
+\newcommand{\COLS}{4}
+
+\input{style}
+
+\begin{document}
+\normalsize
+\begin{multicols*}{\COLS}
+\raggedcolumns
+\RaggedRight
+
+\input{sections/00-legend}
+\input{sections/01-intro-crisp}
+\input{sections/02-kpi}
+\input{sections/03-data-understanding}
+\input{sections/04-data-preparation}
+\input{sections/05-descriptive-stats}
+\input{sections/06-visualisation}
+\input{sections/07-clustering}
+\input{sections/08-classification}
+\input{sections/09-lime}
+\input{sections/10-optimisation}
+\input{sections/11-ethics-privacy}
+\input{sections/12-typical-questions}
+
+\end{multicols*}
+\end{document}

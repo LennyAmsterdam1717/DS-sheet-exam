@@ -1,0 +1,86 @@
+% ============================================================
+%  style.tex -- fonts, sizes, colours and the entry macros
+%  Change the look of the whole sheet here; content lives in sections/.
+% ============================================================
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}            % load before txfonts
+\usepackage{txfonts}            % Times-like text + maths: compact and readable when small
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{needspace}
+\usepackage{ragged2e}
+
+% ---------- font size (base 6.5pt, nothing below 6pt for text) ----------
+\makeatletter
+\renewcommand\normalsize{\@setfontsize\normalsize{6.5}{7.35}%
+  \abovedisplayskip 1.5pt plus 0.5pt \belowdisplayskip 1.5pt plus 0.5pt
+  \abovedisplayshortskip 0.5pt \belowdisplayshortskip 0.5pt}
+\renewcommand\small{\@setfontsize\small{6}{6.8}}
+\renewcommand\footnotesize{\@setfontsize\footnotesize{6}{6.8}}
+\renewcommand\large{\@setfontsize\large{7.2}{8.2}}
+\makeatother
+\DeclareMathSizes{6.5}{6.5}{5}{4.5}
+\DeclareMathSizes{6}{6}{5}{4.5}
+\DeclareMathSizes{7.2}{7.2}{5.5}{4.5}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.25pt}
+\setlength{\columnsep}{2.2mm}
+\setlength{\columnseprule}{0.2pt}
+\setlength{\tabcolsep}{1.6pt}
+\renewcommand{\arraystretch}{1.0}
+\setlength{\multicolsep}{0pt}
+\pagestyle{empty}
+
+% ---------- colours, one per topic ----------
+\definecolor{cLegend}{HTML}{4D4D4D}
+\definecolor{cIntro}{HTML}{1F5FAD}
+\definecolor{cKpi}{HTML}{6A3D9A}
+\definecolor{cData}{HTML}{00796B}
+\definecolor{cPrep}{HTML}{2E7D32}
+\definecolor{cStats}{HTML}{C62828}
+\definecolor{cVis}{HTML}{AD1457}
+\definecolor{cClust}{HTML}{E65100}
+\definecolor{cClass}{HTML}{0D47A1}
+\definecolor{cLime}{HTML}{5D4037}
+\definecolor{cOpt}{HTML}{00838F}
+\definecolor{cEthics}{HTML}{455A64}
+\definecolor{cExam}{HTML}{B71C1C}
+
+% ---------- topic block:  \begin{topic}{Title}{colour} ... \end{topic} ----------
+% Coloured header bar + coloured closing rule. Plain flowing text inside, so topics
+% break cleanly across columns and pages (framed boxes leave gaps in multicols).
+\newenvironment{topic}[2]{%
+  \def\tc{#2}\par\needspace{5\baselineskip}\vspace{0.7mm}%
+  \noindent\colorbox{#2}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\bfseries\large\strut #1}}%
+  \par\nopagebreak\vspace{0.25mm}}%
+  {\par\nopagebreak\vspace{0.2mm}{\color{\tc}\hrule height 0.5pt}\vspace{0.4mm}}
+\setlength{\fboxsep}{0.6mm}
+\def\tc{black}
+
+% ---------- entry macros ----------
+% \sub{Heading}                    small coloured heading inside a topic
+\newcommand{\sub}[1]{\par\vspace{0.6pt}{\color{\tc}\bfseries #1}\par}
+% \formula{Name}{math}{note}       name + inline (display-style) formula; note = what it is / how to read values
+\newcommand{\formula}[3]{\par\hangindent=0.9em\hangafter=1%
+  \textbf{#1}\ $\displaystyle\sidelimits #2$%
+  \if\relax\detokenize{#3}\relax\else\par\hangindent=0.9em\hangafter=0\noindent{\color{\tc}$\triangleright$}\ #3\fi\par}
+% \formulaD{Name}{math}{note}      same, but the formula gets its own centred line (for long formulas)
+\newcommand{\formulaD}[3]{\par\textbf{#1}\vspace{-1.2pt}\[\sidelimits #2\]\vspace{-1.2pt}%
+  \if\relax\detokenize{#3}\relax\else\par\hangindent=0.9em\hangafter=0\noindent{\color{\tc}$\triangleright$}\ #3\fi\par}
+% \insight{text}                   one bullet of exam-relevant insight
+\newcommand{\insight}[1]{\par\hangindent=0.75em\hangafter=1\makebox[0.75em][l]{\color{\tc}\textbullet}#1\par}
+% \ex{text}                        worked example from slides/exercises
+\newcommand{\ex}[1]{\par\hangindent=0.75em\hangafter=1\makebox[0.75em][l]{\color{\tc}\textit{e}}\textit{#1}\par}
+% \term{word}                      bold key term inside running text
+\newcommand{\term}[1]{\textbf{#1}}
+
+% sums/products in formulas get their limits at the side (saves height)
+\let\oldsum\sum \let\oldprod\prod
+\newcommand{\sidelimits}{\def\sum{\oldsum\nolimits}\def\prod{\oldprod\nolimits}}
+% handy maths shorthands
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\Prob}{P}

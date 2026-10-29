@@ -1,0 +1,33 @@
+% ---------- Visualisation, dashboards, storytelling (Krempl part 3 + Groen lecture) ----------
+\begin{topic}{6 \; Visualisation, dashboards \& storytelling}{cVis}
+\insight{\term{Data visualisation}: visual representations to explore, make sense of and communicate data. \term{Information visualisation} = descriptive, retrospective (what happened); predictive analytics = forward-looking; \term{visual analytics} = combination of both (not the same as info vis).}
+\insight{Pipeline: raw data $\to$ processed (enrich, link, format, clean) $\to$ transformed (stats, clustering, correlations) $\to$ visual output; get user-group feedback.}
+\insight{Visual tasks: \term{search} (find object), \term{counting} (few objects, one by one), \term{estimation} (many objects, approximate \& compare), \term{correlation} (2+ variables related?), \term{pattern identification} (trends, patterns).}
+\sub{Choosing the chart (analysis $\to$ chart $\to$ task)}
+\insight{Comparison / which is largest $\to$ \term{bar chart, sorted} (length = most accurate) \,$\cdot$\, search.}
+\insight{Trend over time $\to$ \term{line chart} (point graph if interpolation between time points is meaningless) \,$\cdot$\, pattern id.}
+\insight{Relationship of 2 measures $\to$ \term{scatterplot} (+ regression line) \,$\cdot$\, correlation.}
+\insight{Shares / contribution $\to$ pie only for few slices, never 3D; many segments $\to$ heat map.}
+\insight{Rank over time $\to$ \term{bump chart}; now vs start (2 moments) $\to$ \term{slope chart} or dot plot (estimation); two time dims (weekday $\times$ hour, day $\times$ month) $\to$ \term{highlight table/heatmap}; events at different times $\to$ line chart on aligned axis (``days since start''); duration $\to$ \term{Gantt}; actual vs target $\to$ \term{bullet graph}; values per region $\to$ choropleth (shading) or symbol map (values at points); exact values $\to$ (highlight) table; values across 2 dims $\to$ dot plot.}
+\insight{Avoid pies, donuts, word clouds, bubbles: angles/areas read far less accurately than length; many slices unreadable; legend look-ups. Two 9-slice pies $\to$ grouped/sorted bars or dot plot on common axis.}
+\sub{Colour}
+\insight{\term{Categorical}: unordered groups, same colour per entity in every chart. \term{Sequential}: one direction low$\to$high (light$\to$dark), e.g.\ uptake \% on a map. \term{Diverging}: neutral midpoint (0 or target), e.g.\ change $-3..+3$ pp, distance to target. Pick one and use consistently; mind colour-blindness (avoid red/green; yellow/light green on projectors).}
+\sub{Gestalt principles}
+\insight{\term{Similarity} alike = related; \term{continuity} eye follows smooth paths; \term{proximity} close = related; \term{figure-ground} focal figure stands out from background; \term{common fate} moving together = group; \term{closure} gaps filled; \term{symmetry \& order}; \term{Pr\"agnanz} simplest form preferred; \term{common region} shared boundary = group.}
+\ex{KPI tiles of NL \& BE mixed $\to$ proximity/common region (group per country in a box); NL blue in one chart, orange in next $\to$ similarity (fixed colour); filters far from charts $\to$ proximity; key KPI looks like everything else, heavy gridlines $\to$ figure-ground (enlarge KPI, fade grid).}
+\sub{Honest \& decision-oriented charts}
+\insight{Truncated axis legitimate only if zero is not a meaningful reference and audience reads axes (temperature, pH, index). Test: \emph{would the conclusion change with the full axis?} If yes, disclose or remove.}
+\insight{For a decision: sort by value (rank read off position), add benchmark/reference line, colour below-target group. Trend + who is behind $\to$ \term{small multiples} (one panel per district, shared y-axis, ordered by rank, reference line), not 12 coloured lines (lines cross, too many categorical colours).}
+\sub{Dashboards}
+\insight{Single screen, consolidated, visual; aim: fast capture + drill-down. Challenges: fit all on one screen, clear, easy to digest, logically consistent \& intuitive, invite exploration.}
+\insight{3 layers: \term{monitoring} (graphical, abstract), \term{analysis} (summarised dimensional), \term{management} (detailed operational).}
+\insight{Qualities: highlight exceptions needing action; intuitive; integrate many systems; drill-down/through; timely; easy to deploy \& maintain.}
+\insight{Best practices: benchmark KPIs with industry; wrap metrics in metadata (source, \% missing, horizon); usability check; prioritise alerts; business-user comments; 3 levels (dashboard, static report, self-service cube); right visual constructs; guided analytics.}
+\insight{Design: interface (components, prioritise with \term{MoSCoW}), visual (technique + Gestalt), implementation (libraries, OS, browser), runtime scalability (data, algorithmic, visual, perceptual). One question per view, stated audience, motivated chart choice.}
+\sub{Narrative visualisation (Segel \& Heer)}
+\insight{\term{Author-driven}: linear order, heavy messaging, no interactivity. \term{Reader-driven}: no prescribed order, no messaging, free interactivity.}
+\insight{\term{Martini glass}: \emph{narrow} author-driven start (catchy headline/illustration), logical flow (arrows, rows, animation), then opens up for exploration (details on demand). Not broad-then-narrow!}
+\insight{\term{Interactive slideshow}: slide/step format with interaction within steps; mix of author/reader; user can stay longer (time slider).}
+\insight{\term{Drill-down story}: starts with general theme / big picture (``map''), user selects \& explores parts in depth.}
+\insight{Tacit tutorial (show interaction possibilities along the way); visual outliers (colour, shape, orientation) attract attention: align similar content, use distinct features only for highlights; mind culture (reading direction, colour meaning).}
+\end{topic}
