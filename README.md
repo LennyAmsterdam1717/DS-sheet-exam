@@ -18,8 +18,7 @@ Print double-sided at **100% / actual size**, not "fit to page".
 |---|---|
 | `main.tex` | Page layout only: paper size, orientation, number of columns, order of the topics |
 | `style.tex` | Fonts, font size, colours and the entry macros |
-| `sections/00-legend.tex` | Symbol legend (every symbol used on the sheet) |
-| `sections/01`–`11-*.tex` | One file per topic, in course order |
+| `sections/02`–`11-*.tex` | One file per topic, in course order |
 | `sections/12-typical-questions.tex` | Recurring exam question types and how to approach them |
 | `.github/workflows/build.yml` | Compiles `main.tex` and uploads the PDF on every push |
 

@@ -1,15 +1,10 @@
 % ---------- Data preparation: quality, cleaning, outliers, transformation, integration, reduction ----------
-\begin{topic}{4 \; Data preparation \& data quality}{cPrep}
-\insight{Data scientists spend 50--80\% of time collecting \& preparing data. Real data: dirty, misaligned, complex, inaccurate.}
+\begin{topic}{3 \; Data preparation \& data quality}{cPrep}
 \sub{4 preprocessing steps (Sharda) + example}
 \insight{\term{Consolidation}: collect, select relevant, integrate sources (e.g.\ last month's transactions with quantity \& price).}
 \insight{\term{Cleaning}: missing values, outliers/noise, duplicates (e.g.\ remove transactions with negative price).}
 \insight{\term{Transformation}: data types, normalise ranges (for Euclidean distance), discretise, construct attributes (e.g.\ value = quantity $\cdot$ price; income/age).}
 \insight{\term{Reduction}: dimension (PCA), volume (subsample), balancing (few positives).}
-\sub{Data quality dimensions}
-\insight{\term{Accuracy} recorded correctly; \term{completeness} all relevant data recorded; \term{uniqueness} entity recorded once; \term{timeliness} up to date; \term{consistency} data agrees with itself.}
-\insight{Problems of this definition: unmeasurable, context-independent, incomplete, vague $\Rightarrow$ want use-based, measurable metrics: conformance to schema, to business rules, accuracy (audit/proxy), glitches, end-to-end success.}
-\insight{Sources: manual entry, no uniform standards, parallel entry (duplicates), approximations, measurement errors. Dirty = \term{incomplete} (Occupation=``''), \term{noisy} (Salary=$-10$), \term{inconsistent} (Age 42 vs birth 2010; ratings 1,2,3 $\to$ A,B,C), \term{intentional} (disguised missing: everyone born 1 Jan; 99999).}
 \sub{Missing values}
 \insight{Options: ignore tuple (ok if class label missing; bad if many), fill manually, global constant (``unknown''), attribute mean, \term{class-conditional mean} (smarter), time series: neighbouring value. Course advice: flag as NaN, impute only when the technique needs it, don't delete instances; flag obvious outliers as NaN too.}
 \sub{Noise: binning (equal-frequency bins)}
