@@ -7,7 +7,7 @@
 \formula{Bayes theorem}{P(Y|X)=\frac{P(X|Y)\,P(Y)}{P(X)}}{posterior = class-conditional $\times$ prior / evidence.}
 \formula{Prior}{P(Y{=}+)=\frac{|L_+|}{|L_+\cup L_-|}}{}
 \insight{\term{Bayes-optimal}: predict $+$ iff $P(+|x)>P(-|x)$ $\Leftrightarrow$ $P(x,+)>P(x,-)$. Decision boundary where they are equal (intersections of the joint curves). \term{Bayes error rate} = unavoidable error: at each $x$ the smaller posterior $\min_y P(y|x)$; integrate (area under the lower joint curve). Zero FPs \emph{and} zero FNs impossible when classes overlap.}
-\ex{$P(x{=}4,+)=.077$, $P(x{=}4,-)=.159$ $\to P(x{=}4)=.236$, $P(+|4)=.077/.236=.33<.67\to$ classify $-$. In a region where everything is called $+$: FN rate $=0$.}
+\insight{In a region where everything is called $+$: FN rate $=0$.}
 \sub{Estimating $P(X|Y)$}
 \insight{\term{Histogram}: discretise $X$ into intervals, count per class, frequencies as $P(x|y)$. Interval too big $\to$ loss of detail; too small $\to$ lack of data (empty cells).}
 \formulaD{Kernel density estimate}{K(x,x_i)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\Big(-\frac{(x-x_i)^2}{2\sigma^2}\Big),\qquad \hat P(x|+)=\frac{\sum_{x_i\in L_+}K(x,x_i)}{|L_+|}}{Gaussian on every training instance; bandwidth $\sigma$ small $\to$ overfits noise/outliers, large $\to$ oversmooths. Repeat per class, multiply by prior, compare.}
@@ -15,7 +15,6 @@
 \formulaD{Multivariate Bayes}{P(Y|X_1,X_2)=\frac{P(X_2|Y,X_1)\cdot P(X_1|Y)\cdot P(Y)}{P(X_1,X_2)}=\frac{P(X_1,X_2|Y)\cdot P(Y)}{P(X_1,X_2)}}{needs the \emph{joint} $P(X_1,X_2|Y)$ (counts, or parametric model e.g.\ Gaussian mixture) $\to$ curse of dimensionality ($2^D$ cells).}
 \formulaD{Naive Bayes}{P(Y|X_1,X_2)\overset{*}{=}\frac{P(X_2|Y)\cdot P(X_1|Y)\cdot P(Y)}{P(X_1,X_2)}\propto P(Y)\cdot\prod_{i=1}^{2}P(X_i|Y)}{$\overset{*}{=}$ uses \term{conditional independence} of features given the class: $P(X_i|X_j,Y)=P(X_i|Y)$, so $P(X_2|Y,X_1)$ becomes $P(X_2|Y)$. Violated when, within a class, $X_1$ and $X_2$ co-vary (check $P(X_1,X_2|Y)$ vs $P(X_1|Y)P(X_2|Y)$ per cell).}
 \insight{\term{Cond.\ independent given the class}: once you know the class, knowing $X_1$ tells you nothing more about $X_2$. Test (scatterplot): pick one class (one colour) and ask whether knowing $X_1$ would help you guess $X_2$ for that colour. \textbf{Yes}, it helps $\to$ violated; \textbf{no} $\to$ holds.}
-\ex{Golf (14 rows, 9 yes): $P(\text{hot})=4/14$, $P(\text{yes})=9/14$, $P(\text{hot},\text{yes})=2/14$, $P(\text{hot}|\text{yes})=2/9$, $P(\text{yes}|\text{hot})=2/4$. Cool \& normal: multivariate $=3/4$ yes. Naive: yes $\propto\frac9{14}\cdot\frac39\cdot\frac69=\frac17$, no $\propto\frac5{14}\cdot\frac15\cdot\frac15=\frac1{70}$ $\to$ yes (normalised $10/11$).}
 \sub{Other classifiers}
 \insight{\term{k-NN}: memorise all training data; for new $x$ compute distance to all, assign majority label of $k$ nearest. \term{Lazy learner}: no model/abstraction, fast training, slow prediction.}
 \insight{\term{Decision tree}: iteratively split on features, greedy choice of split attribute (e.g.\ information gain); leaf predicts its majority class.}

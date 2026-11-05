@@ -16,7 +16,7 @@
 \insight{Entity = one object (row/tuple); attribute = column; entity type $\approx$ table; \term{primary key} uniquely identifies an entity; \term{foreign key} refers to another table's key.}
 \insight{\texttt{SELECT [DISTINCT] cols FROM t [JOIN t2 ON cond] WHERE .. GROUP BY .. HAVING .. ORDER BY .. [ASC|DESC] LIMIT n;} \; \texttt{COUNT()} with \texttt{GROUP BY} aggregates per group.}
 \insight{\term{INNER}: only matches. \term{LEFT}: all left rows (+NULL if no match). \term{RIGHT}: all right rows. \term{FULL OUTER}: everything, matched where possible.}
-\ex{customers(4) $\bowtie$ orders(4), Anna 2 orders, Bram \& Daan none, order 104 $\to$ non-existent customer: INNER 3, LEFT 5, RIGHT 4, FULL 6 rows. Anna appears twice (one row per match).}
+\insight{One output row per match (customer with 2 orders appears twice); no match $\to$ NULLs on the missing side.}
 \insight{``Customers who never ordered'' = LEFT JOIN + \texttt{WHERE orders.id IS NULL}; ``orders without valid customer'' (quality check) = RIGHT JOIN + customer side NULL.}
 \sub{Nature of data}
 \insight{Data = collection of facts (observations, experiments, transactions); lowest abstraction; \term{garbage in, garbage out} $\Rightarrow$ make data analytics-ready.}
