@@ -26,7 +26,7 @@
 \DeclareMathSizes{7.2}{7.2}{5.5}{4.5}
 
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.25pt}
+\setlength{\parskip}{0.25pt plus 2pt}
 \setlength{\columnsep}{2.2mm}
 \setlength{\columnseprule}{0.2pt}
 \setlength{\tabcolsep}{1.6pt}
@@ -53,7 +53,7 @@
 % Coloured header bar + coloured closing rule. Plain flowing text inside, so topics
 % break cleanly across columns and pages (framed boxes leave gaps in multicols).
 \newenvironment{topic}[2]{%
-  \def\tc{#2}\par\needspace{5\baselineskip}\vspace{0.7mm}%
+  \def\tc{#2}\par\needspace{3\baselineskip}\vspace{0.7mm}%
   \noindent\colorbox{#2}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\bfseries\large\strut #1}}%
   \par\nopagebreak\vspace{0.25mm}}%
   {\par\nopagebreak\vspace{0.2mm}{\color{\tc}\hrule height 0.5pt}\vspace{0.4mm}}

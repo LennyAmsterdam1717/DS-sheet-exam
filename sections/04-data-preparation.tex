@@ -26,9 +26,6 @@
 \insight{\term{Curse of dimensionality}: more dims $\to$ sparse data, distances less meaningful; $D$ features split in 2 intervals $\to 2^D$ cells (3 $\to$ 8, 4 $\to$ 16).}
 \insight{\term{PCA}: eigenvectors of covariance matrix = new axes capturing most variance; keep first $k$ (eigenvalue $>1$ considered important). Also SVD, feature subset selection: drop redundant (price \& sales tax) / irrelevant (student ID for GPA).}
 \insight{Model-based (regression, log-linear), histograms (equal-width vs equal-frequency buckets), \term{sampling}: SRS without/with replacement, \term{stratified} (per partition, proportional; for skewed data), cluster sample.}
-\sub{Class imbalance (Application Case 2.2, student attrition)}
-\insight{80\% stay / 20\% drop out: ``all continue'' is highly accurate but useless. Imbalanced: ~87\% accuracy but dropouts $<50\%$ found; balanced (all minority + equal majority sample, 10$\times$): ~80\% overall, dropouts ~75\%. Re-balancing distorts the learned class prior.}
-\insight{Variable importance (sensitivity analysis): train model with and without the variable; performance difference = impact.}
 \sub{Data dictionary (one row per column)}
 \insight{name, data type, unit/format, allowed values, missing-value code, source system; write ``not documented'' instead of guessing.}
 \insight{Rule: \term{fix in preparation} what is knowable from the data (postcode case, boolean encodings 1/TRUE/true); \term{report as limitation} what isn't (date 03-04 with day $\le12$, 42.000 = 42 or 42\,000?, unconfirmed duplicates).}
