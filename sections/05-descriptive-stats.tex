@@ -19,7 +19,7 @@ $\Phi(z)$ & .500 & .691 & .841 & .933 & .950 & .975 & .977 & .999\\
 \formula{Variance}{s^2=\frac{\sum_{i=1}^n(x_i-\xbar)^2}{n-1}}{$n-1$: unbiased sample variance (dividing by $n$: 2nd moment around mean); $s=\sqrt{s^2}$.}
 \formula{Mean abs.\ deviation}{\text{MAD}=\frac{1}{n}\sum|x_i-\xbar|}{penalises large deviations less than $s$.}
 \sub{Shape}
-\formulaD{Skewness (symmetry)}{\text{skew}=\frac{\frac1n\sum(x_i-\xbar)^3}{\big(\frac1n\sum(x_i-\xbar)^2\big)^{3/2}}\cdot\frac{n^2}{(n-1)(n-2)}}{$>0$: \term{tail on the right}, mass ``swayed left'', usually mean $>$ median. $<0$: \term{tail on the left}, usually mean $<$ median. $\approx0$: symmetric. Exceptions exist (discrete data, Weibull): the cube makes the \emph{longer tail} decide, not the mean--median order. Book p.106 is wrong.}
+\formulaD{Skewness (symmetry)}{\text{skew}=\frac{\frac1n\sum(x_i-\xbar)^3}{\big(\frac1n\sum(x_i-\xbar)^2\big)^{3/2}}\cdot\frac{n^2}{(n-1)(n-2)}}{(x: value, y: frequency) $>0$: \term{tail on the right}, mass ``swayed left'', usually mean $>$ median. $<0$: \term{tail on the left}, usually mean $<$ median. $\approx0$: symmetric. Exceptions exist (discrete data, Weibull): the cube makes the \emph{longer tail} decide, not the mean--median order. Book p.106 is wrong.}
 \formula{Kurtosis}{\frac{\sum(x_i-\xbar)^4}{n\,s^4}\ (\text{normal}=3);\ \text{excess}=\text{kurt}-3}{peakedness vs normal: excess $=0$ mesokurtic (normal), $>0$ leptokurtic (tall/sharp peak), $<0$ platykurtic (flat).}
 \formula{Moments}{\text{moment}_p=E[(X-\xbar)^p]}{$p=2$ variance, 3 skewness, 4 kurtosis (standardised).}
 \sub{Information content}
