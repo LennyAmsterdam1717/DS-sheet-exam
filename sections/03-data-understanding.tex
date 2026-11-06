@@ -29,10 +29,8 @@ interval & + arithmetic mean, std.\ (fixed unit, \textdegree C) \\
 ratio & + geometric \& harmonic mean, variation coeff.\ (ratio meaningful: length, income) \\
 \end{tabularx}
 \sub{Arrival of data \& drift}
-\insight{\term{Pool/batch}: all at once. \term{Stream}: arrives sequentially (chunks or one-by-one), possibly infinite, few instances at start, non-stationary. \term{Time series}: time-stamped.}
 \insight{Stream challenges: limited computation/storage (online processing), adaptation to change. Fixes: incremental computation (store partial sums; overflow risk), \term{forgetting} old instances, \term{windowing} (only most recent).}
 \insight{Non-stationary $\Rightarrow$ ``the'' distribution varies over time; e.g.\ average monthly sales over 5 years mixes seasons/trends $\Rightarrow$ use recent window, compare with last month \& same month last year.}
-\insight{\term{Concept drift} (population drift, dataset shift) by: affected distribution $P(X,Y),P(X),P(Y),P(Y|X),P(X|Y)$; smoothness: sudden/abrupt, incremental, gradual; recurring concepts (old models relevant again); systematic vs unsystematic; \term{real} (changes decision boundary) vs virtual. A single outlier is \emph{not} drift.}
 \sub{Orchestration (Docker)}
 \insight{\term{Orchestration} = automated configuration, coordination, management, scaling \& maintenance of (many) containers, e.g.\ \term{Kubernetes}. Docker builds \& runs single containers (\texttt{docker run}); \texttt{docker compose} starts a small multi-container stack on one machine (app + database); an orchestrator does this across many machines: starting, restarting failed containers, scaling up/down.}
 \end{topic}
