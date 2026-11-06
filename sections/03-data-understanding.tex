@@ -23,7 +23,7 @@ SELECT * FROM customer WHERE ckey=1;\ \textrm{$\to$ Anna}\\
 SELECT s.skey, c.name FROM sale AS s INNER JOIN customer\\ \ AS c ON s.ckey=c.ckey ORDER BY s.ckey;\ \textrm{$\to$ (10,Anna),(11,Anna)}\\
 SELECT ckey, COUNT(*) FROM sale GROUP BY ckey;\ \textrm{$\to$ (1,2),(3,1)}\\
 DELETE FROM customer WHERE ckey=1;\ \textrm{$\to$ sales 10, 11 deleted too}\par}
-\insight{customer JOIN sale: \term{INNER} matches only (2 rows); \term{LEFT} + Bram/NULL (3); \term{RIGHT} + sale 12/NULL (3); \term{FULL} all (4). Never ordered = LEFT + \texttt{skey IS NULL}; orphan sale = RIGHT + \texttt{name IS NULL}.}
+\insight{customer JOIN sale: \term{INNER} matches only (2 rows); \term{LEFT} + Bram/NULL (3); \term{RIGHT} + sale 12/NULL (3); \term{FULL} all (4). Never ordered = LEFT + \texttt{skey IS NULL}; orphan sale = RIGHT + \texttt{name IS NULL}; all \texttt{ON sale.ckey=customer.ckey}.}
 \sub{Nature of data}
 \insight{Data = collection of facts (observations, experiments, transactions); lowest abstraction; \term{garbage in, garbage out} $\Rightarrow$ make data analytics-ready.}
 \insight{\term{Structured} (processable as is: star ratings, word counts, category codes \emph{or} names, transaction value) vs \term{semi-structured} (XML) vs \term{unstructured} (review text, images): need text mining or conversion.}
