@@ -9,7 +9,4 @@
 \sub{Categories}
 \insight{unlimited (no constraints) vs limited; one vs many decision variables; single- vs multi-criteria; continuous vs discrete (integer) vs mixed; linear vs non-linear; deterministic (same cause $\to$ same effect) vs stochastic; static vs dynamic (relations change over time).}
 \insight{Problem types: LP \& quadratic (mostly convex, ``easy'', e.g.\ simplex); quadratic constraints/conic; integer \& constraint programming (non-convex); smooth non-linear; non-smooth.}
-\sub{Recipe \& PuLP}
-\insight{1 variables + units $\to$ 2 objective (max/min) $\to$ 3 constraints: capacity/budget, requirements, ratios ($x_1\ge0.5x_2\Rightarrow -x_1+0.5x_2\le0$), bounds, non-negativity $\to$ 4 standard form ($\vec c$, $A$, $\vec b$) $\to$ 5 solve, check status = Optimal $\to$ 6 read values \& binding constraints $\to$ 7 sensitivity: change RHS of a binding constraint $\Rightarrow$ optimum moves.}
-\insight{PuLP: {\small\texttt{prob = LpProblem("Portfolio", LpMaximize)}\\ \texttt{x1 = LpVariable("x1", upBound=10)}\\ \texttt{prob += 0.11*x1 + 0.17*x2} \textrm{(objective)}\\ \texttt{prob += x1 + x2 <= 12} \textrm{(constraint)}\\ \texttt{prob.solve(); LpStatus[prob.status]; v.varValue}}\\ R \texttt{lpSolve} assumes $\vec x\ge0$.}
 \end{topic}
