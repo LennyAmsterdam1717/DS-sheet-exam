@@ -1,0 +1,9 @@
+% ---------- Privacy models (Krempl part 6) ----------
+\begin{topic}{10 \; Privacy models}{cEthics}
+\insight{Deleting name/address/SSN is \emph{not} enough: \term{quasi-identifiers} (postcode, birth date, sex) + external data re-identify. Class = same quasi-ids.}
+\insight{\term{k-anonymity}: every class $\ge k$ records (indistinguishable). Flaw: class may share one sensitive value (all positive) $\to$ disclosed.}
+\insight{\term{l-diversity}: + $\ge l$ well-represented sensitive values per class. Flaw: ignores distribution vs whole population.}
+\insight{\term{t-closeness}: + each class's sensitive distribution within $t$ of population's.}
+\formula{$\epsilon$-diff.\ privacy}{P[A(D)]\le e^{\epsilon}P[A(D')]}{$D,D'$ differ in 1 record: outcome barely changes (participating $\approx$ not). Smaller $\epsilon$ = more privacy \& noise; no guide for $\epsilon$.}
+\insight{Means: \term{generalisation} (age $\to$ band), \term{suppression} (hide cells $n<k$), \term{anatomisation} (quasi-ids \& sensitive in 2 tables), \term{perturbation}, noise.}
+\end{topic}
