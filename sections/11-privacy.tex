@@ -1,13 +1,14 @@
 % ---------- Privacy models (Krempl part 6) ----------
 \begin{topic}{10 \; Privacy models}{cEthics}
-\insight{Removing names is \emph{not} enough: \term{quasi-ids} (postcode, birth date, sex) + external data re-identify. \term{Equivalence class} = records with equal quasi-ids; attacker who knows your quasi-ids knows your class.}
+\insight{Removing names \emph{not} enough: \term{quasi-ids} (postcode, birth date, sex) + external data re-identify. \term{Equivalence class} = records with equal quasi-ids.}
 \insight{\term{k-anonymity} protects \emph{who} you are: every class $\ge k$ records $\to$ you hide among $k$. Gap: all in class share ``positive'' $\to$ value leaks anyway.}
 \insight{\term{l-diversity} protects \emph{what} you have: + $\ge l$ different sensitive values per class $\to$ membership doesn't reveal yours. Gap: 90\% positive in class vs 5\% overall.}
 \insight{\term{t-closeness}: + each class's sensitive distribution $\approx$ population's (distance $\le t$) $\to$ knowing your class teaches nothing extra.}
-\formula{$\epsilon$-diff.\ privacy}{P[A(D)]\le e^{\epsilon}P[A(D')]}{protects \emph{whether you are in the data}: analysis result with ($D$) or without your record ($D'$) nearly the same (noise added). Smaller $\epsilon$ = more privacy, less accuracy; no guide for $\epsilon$.}
+\insight{\term{In short}: k = group records into $\ge k$ lookalikes; l = $\ge l$ different sensitive values \emph{inside} each group; t = each group's mix $\approx$ population's.}
+\formula{$\epsilon$-diff.\ privacy}{P[A(D)]\le e^{\epsilon}P[A(D')]}{protects \emph{whether you're in the data}: result with ($D$)/without ($D'$) your record nearly equal. Smaller $\epsilon$ = more privacy \& noise; no guide for $\epsilon$.}
 \insight{Means: \term{generalisation} (age $\to$ band), \term{suppression} (hide cells $n<k$), \term{anatomisation} (quasi-ids \& sensitive in 2 tables), \term{perturbation}, noise.}
 \sub{Cloaking against facial recognition}
 \insight{\term{Cloaking} = adversarial \term{spoofing} attack used \emph{for} privacy: tiny, near-invisible pixel changes to your photos so recognition fails on you.}
 \insight{\term{Fawkes}: cloaked training photos shift user $U$'s features towards another target class $T$ $\Rightarrow$ model learns a wrong decision boundary for $U$ $\Rightarrow$ real (uncloaked) photos of $U$ not recognised (poisons model \term{training}).}
-\insight{\term{LowKey}: adversarial attack on \term{gallery} images (database of the recognition system, after face localisation \& alignment) $\Rightarrow$ new probe photo of you does not match your gallery entry. Stronger cloak = more protection but more visible.}
+\insight{\term{LowKey}: adversarial attack on \term{gallery} images (the recognition system's database) $\Rightarrow$ new probe photo of you does not match your gallery entry. Stronger cloak = more protection but more visible.}
 \end{topic}
