@@ -6,4 +6,8 @@
 \insight{\term{t-closeness}: + each class's sensitive distribution within $t$ of population's.}
 \formula{$\epsilon$-diff.\ privacy}{P[A(D)]\le e^{\epsilon}P[A(D')]}{$D,D'$ differ in 1 record: outcome barely changes (participating $\approx$ not). Smaller $\epsilon$ = more privacy \& noise; no guide for $\epsilon$.}
 \insight{Means: \term{generalisation} (age $\to$ band), \term{suppression} (hide cells $n<k$), \term{anatomisation} (quasi-ids \& sensitive in 2 tables), \term{perturbation}, noise.}
+\sub{Cloaking against facial recognition}
+\insight{\term{Cloaking} = adversarial \term{spoofing} attack used \emph{for} privacy: tiny, near-invisible pixel changes to your own photos before posting, so recognition models fail on you.}
+\insight{\term{Fawkes}: cloaked training photos shift user $U$'s features towards another target class $T$ $\Rightarrow$ model learns a wrong decision boundary for $U$ $\Rightarrow$ real (uncloaked) photos of $U$ not recognised (poisons model \term{training}).}
+\insight{\term{LowKey}: adversarial attack on \term{gallery} images (database of the recognition system, after face localisation \& alignment) $\Rightarrow$ new probe photo of you does not match your gallery entry. Stronger cloak = more protection but more visible.}
 \end{topic}
