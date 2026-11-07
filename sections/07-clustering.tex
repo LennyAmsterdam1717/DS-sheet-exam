@@ -26,6 +26,6 @@
 \formula{Purity}{\frac1n\sum_{i=1}^{|Z|}\max_j|z_i\cap y_j|\in[0,1]}{each cluster gets its majority class; \term{grows with \#clusters} (1 if one instance per cluster) $\Rightarrow$ can't compare different $k$.}
 \formulaD{NMI}{\begin{gathered}NMI=\frac{I(Y,Z)}{(H(Z)+H(Y))/2},\quad H(Z)=-\sum_i\frac{|z_i|}{n}\log\frac{|z_i|}{n}\\ I(Y,Z)=\sum_i\sum_j\frac{|z_i\cap y_j|}{n}\log\frac{n\,|z_i\cap y_j|}{|z_i|\,|y_j|}\end{gathered}}{in [0,1], 1 perfect; normalised for \#clusters $\Rightarrow$ use to compare clusterings with different $k$.}
 \formula{Rand Index}{RI=\frac{TP+TN}{TP+FP+FN+TN}\ \text{(over all }\tbinom n2\text{ pairs)}}{TP same cluster \& same class; FP same cluster, diff.\ class; FN diff.\ cluster, same class; TN diff.\ both. Share of correct pair decisions. Adjusted RI corrects for chance ($\approx0$ = random agreement).}
-\insight{Pair counting from contingency table ($n_{ij}=|z_i\cap y_j|$): $TP=\sum_{ij}\binom{n_{ij}}2$; $TP+FP=\sum_i\binom{|z_i|}2$ (cluster sizes); $TP+FN=\sum_j\binom{|y_j|}2$ (class sizes); $TN=\binom n2-TP-FP-FN$.}
+\insight{Pair counting (contingency table): $TP=\sum_{ij}\binom{|z_i\cap y_j|}2$; $TP+FP=\sum_i\binom{\Sigma\text{cols}_i}2$ (cluster sizes); $TP+FN=\sum_j\binom{\Sigma\text{rows}_j}2$ (class sizes); $TN=\binom n2-TP-FP-FN$.}
 \formula{RSS}{RSS_k=\sum_{z_i\in Z}\sum_{x\in z_i}(x-\bar z_i)^2}{always decreases with $k$ (0 when $k=n$) $\Rightarrow$ \term{elbow method}: average RSS over random inits per $k$, plot vs $k$, pick the knee where curve flattens; like choosing \#components in PCA.}
 \end{topic}
