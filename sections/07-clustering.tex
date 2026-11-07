@@ -4,7 +4,7 @@
 \insight{Goal: maximise \term{intra-cluster homogeneity} and \term{inter-cluster heterogeneity}.}
 \sub{Types}
 \insight{\term{Flat} (partitions) vs \term{hierarchical} (hierarchy of instances by proximity, dendrogram; cutting at $k$ gives hard partition). \term{Hard} (one cluster per instance) vs \term{soft/probabilistic} (membership probability for every cluster).}
-\insight{Flat: \term{shape-based} (assumes cluster shape: k-means spheres, EM Gaussian mixture; params: shape, \#components) vs \term{density-based} (clusters separated by low-density regions, e.g.\ DBSCAN with noise label; params: density estimator, threshold).}
+\insight{Flat: \term{shape-based} (assumes cluster shape: k-means spheres, EM Gaussian mixture; params: shape, \#components) vs \term{density-based} (clusters separated by low-density regions, e.g.\ DBSCAN with noise label; params: density estimator, threshold; \#clusters \emph{not} a param).}
 \insight{k-means: flat, hard \,|\, EM-GMM: flat, soft \,|\, agglomerative: hierarchical \,|\, DBSCAN: flat, hard, density-based.}
 \insight{Hierarchical: \term{agglomerative} (start: every instance own cluster, merge closest) vs \term{divisive} (start: one cluster, split).}
 \insight{Linkage = cluster distance: \term{single} closest pair (nearest neighbour; \term{chains}), \term{complete} most distant pair (compact), \term{average} mean over all pairs, \term{Ward} variance-minimising.}
