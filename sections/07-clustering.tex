@@ -5,7 +5,7 @@
 \sub{Types}
 \insight{\term{Flat} (partitions) vs \term{hierarchical} (hierarchy of instances by proximity, dendrogram; cutting at $k$ gives hard partition). \term{Hard} (one cluster per instance) vs \term{soft/probabilistic} (membership probability for every cluster).}
 \insight{Flat: \term{shape-based} (assumes cluster shape: k-means spheres, EM Gaussian mixture; params: shape, \#components) vs \term{density-based} (clusters separated by low-density regions, e.g.\ DBSCAN with noise label; params: density estimator, threshold, MinPts (min.\ points to form a dense region)).}
-\insight{k-means: flat, hard \,|\, EM-GMM: flat, soft \,|\, agglomerative: hierarchical \,|\, DBSCAN: flat, hard, density-based.}
+\insight{k-means: flat, hard \,|\, EM-GMM: flat, soft \,|\, agglomerative: hierarchical \,|\, DBSCAN: flat, hard, density-based, finds outliers (noise).}
 \insight{Hierarchical: \term{agglomerative} (start: every instance own cluster, merge closest) vs \term{divisive} (start: one cluster, split).}
 \insight{Linkage = cluster distance: \term{single} closest pair (nearest neighbour; \term{chains}), \term{complete} most distant pair (compact), \term{average} mean over all pairs, \term{Ward} variance-minimising.}
 \insight{Which data? Spherical/well separated $\to$ k-means/EM (or density); overlapping $\to$ k-means/EM (not single-link/density); elongated, chains, arbitrary shapes $\to$ single-link or density-based; Gaussians + uniform noise $\to$ EM.}
