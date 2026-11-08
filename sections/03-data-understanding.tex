@@ -1,3 +1,4 @@
+\newcommand{\lvl}[2]{\par\noindent\hangindent=3.8em\hangafter=1\makebox[3.8em][l]{#1}#2\par}
 % ---------- Data understanding: warehouse, formats, APIs, SQL, nature of data ----------
 \begin{topic}{2 \; Data understanding: sources, formats, SQL, nature of data}{cData}
 \sub{Data warehouse (DW)}
@@ -22,12 +23,11 @@ SELECT sale.salekey, customer.name FROM sale INNER JOIN customer ON sale.custome
 \insight{Data = collection of facts (observations, experiments, transactions); lowest abstraction; \term{garbage in, garbage out} $\Rightarrow$ make data analytics-ready.}
 \insight{\term{Structured} (processable as is: star ratings, word counts, category codes \emph{or} names, transaction value) vs \term{semi-structured} (XML) vs \term{unstructured} (review text, images): need text mining or conversion.}
 \sub{Levels of measurement $\to$ allowed statistics}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-nominal & mode (e.g.\ nationality) \\
-ordinal & + median (order meaningful, grades) \\
-interval & + arithmetic mean, std.\ (fixed unit, \textdegree C) \\
-ratio & + geometric \& harmonic mean, variation coeff.\ (ratio meaningful: length, income) \\
-\end{tabularx}
+\lvl{nominal}{mode (e.g.\ nationality)}
+\lvl{ordinal}{+ median (order meaningful, grades)}
+\lvl{interval}{+ arithmetic mean, std.\ (fixed unit, \textdegree C)}
+\lvl{ratio}{+ geom./harm.\ mean, var.\ coeff.\ (ratio meaningful: length, income)}
+\insight{\term{Meaningful} = conclusion survives another valid choice of numbers.}
 \sub{Arrival of data \& drift}
 \insight{Stream challenges: limited computation/storage (online processing), adaptation to change. Fixes: incremental computation (store partial sums; overflow risk), \term{forgetting} old instances, \term{windowing} (only most recent).}
 \insight{Non-stationary $\Rightarrow$ ``the'' distribution varies over time; e.g.\ average monthly sales over 5 years mixes seasons/trends $\Rightarrow$ use recent window, compare with last month \& same month last year.}
