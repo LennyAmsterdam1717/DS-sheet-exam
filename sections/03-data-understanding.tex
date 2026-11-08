@@ -14,16 +14,10 @@
 \insight{\term{REST}: architectural \emph{style} over HTTP: GET read, POST add, PUT update, DELETE remove; mostly JSON; lightweight, fast, cacheable, data-driven.}
 \sub{SQL}
 \insight{Entity = one object (row/tuple); attribute = column; entity type $\approx$ table; \term{primary key} uniquely identifies an entity; \term{foreign key} refers to another table's key.}
-{\small\setlength{\tabcolsep}{1.5pt}\renewcommand{\arraystretch}{0.85}%
-\begin{tabular}[t]{|rl|}\hline\multicolumn{2}{|c|}{\textbf{customer}}\\\texttt{ckey}&\texttt{name}\\\hline 1&Anna\\2&Bram\\\hline\end{tabular}\,%
-\begin{tabular}[t]{|rr|}\hline\multicolumn{2}{|c|}{\textbf{sale}}\\\texttt{skey}&\texttt{ckey}\\\hline 10&1\\11&1\\12&3\\\hline\end{tabular}\,%
-\parbox[t]{0.5\linewidth}{\vspace{1pt}PK: customer.ckey, sale.skey. FK: sale.ckey $\to$ customer.ckey, ON DELETE CASCADE. Customer 3 does not exist; Bram has no sale.}\par
-\ttfamily
-SELECT * FROM customer WHERE ckey=1;\ \textrm{$\to$ Anna}\\
-SELECT s.skey, c.name FROM sale AS s INNER JOIN customer\\ \ AS c ON s.ckey=c.ckey ORDER BY s.ckey;\ \textrm{$\to$ (10,Anna),(11,Anna)}\\
-SELECT ckey, COUNT(*) FROM sale GROUP BY ckey;\ \textrm{$\to$ (1,2),(3,1)}\\
-DELETE FROM customer WHERE ckey=1;\ \textrm{$\to$ sales 10, 11 deleted too}\par}
-\insight{customer JOIN sale: \term{INNER} matches only (2 rows); \term{LEFT} + Bram/NULL (3); \term{RIGHT} + sale 12/NULL (3); \term{FULL} all (4). Never ordered = LEFT + \texttt{skey IS NULL}; orphan sale = RIGHT + \texttt{name IS NULL}; all \texttt{ON sale.ckey=customer.ckey}.}
+\insight{\term{SELECT} columns to return (\texttt{*} all, \texttt{COUNT(*)}); \term{FROM} table (\texttt{AS} alias); \term{WHERE} filter rows; \term{GROUP BY} one row per group (COUNT/SUM/AVG); \term{ORDER BY} sort (ASC default/DESC); \term{DELETE FROM}\dots\term{WHERE} remove rows.}
+\insight{\term{INNER JOIN}\dots\term{ON} key: only matches; \term{LEFT}/\term{RIGHT}: all left/right rows (+NULLs); \term{FULL}: all. No match: LEFT + \texttt{IS NULL}. \term{ON DELETE CASCADE}: delete customer $\to$ its sales too.}
+{\ttfamily SELECT * FROM Customers WHERE Customers.CustomerYearOfBirth=2000;\\
+SELECT sale.salekey, customer.name FROM sale INNER JOIN customer ON sale.customerkey=customer.customerkey ORDER BY customer.customerkey;\par}
 \sub{Nature of data}
 \insight{Data = collection of facts (observations, experiments, transactions); lowest abstraction; \term{garbage in, garbage out} $\Rightarrow$ make data analytics-ready.}
 \insight{\term{Structured} (processable as is: star ratings, word counts, category codes \emph{or} names, transaction value) vs \term{semi-structured} (XML) vs \term{unstructured} (review text, images): need text mining or conversion.}
